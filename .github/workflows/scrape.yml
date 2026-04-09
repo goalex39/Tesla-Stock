@@ -1,0 +1,19 @@
+name: Daily FT Scraper
+on:
+  schedule:
+    - cron: '0 14 * * *'  # 22:00 HKT = 14:00 UTC
+  workflow_dispatch:       # allows manual trigger
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 pandas vaderSentiment schedule
+      - name: Run scraper
+        run: python "Scheduled web script.py"
